@@ -19,6 +19,8 @@ return{
    tempProducts : {
        imagesUrl:[],
    },
+
+   isNew: false,
 }
 
 },
@@ -58,14 +60,41 @@ axios.get(url)
 },
 
 openModal(status, product){
-console.log(status,products);
+console.log(status, product );
+if (status === 'isNew'){
+
+this.tempProducts = {
+    imagesUrl: [],
+}
 productModal.show();
+this.isNew =true;
+}else if (status === 'edit'){
+    this.tempProducts = { ...product};
+    productModal.show();
+    this.isNew = false;
+
+}else if (status === 'delete'){
+    delProductModal.show();
+    this.tempProducts = { ...product};
+
+}
+
+
+
 },
 
-addProduct(){
+updateProduct(){
    
-const url = `${site}/api/${api_path}/admin/product`;
-axios.post(url, { data: this.tempProducts})
+let url = `${site}/api/${api_path}/admin/product`;
+let method = 'post';
+
+if (!this.isNew){//這裡是false
+    url = `${site}/api/${api_path}/admin/product/${this.tempProducts.id}`;
+    method = 'put';
+
+}
+
+axios[method](url, { data: this.tempProducts})
     .then( res=> {
       
         console.log(res);
@@ -73,6 +102,21 @@ axios.post(url, { data: this.tempProducts})
         this.getProducts();
         productModal.hide();
     });
+
+},
+
+delProduct (){
+    let url = `${site}/api/${api_path}/admin/product/${this.tempProducts.id}`;
+    
+    axios.delete(url)
+        .then( res=> {
+          
+            console.log(res);
+            this.getProducts();
+            delproductModal.hide();
+        });
+    
+
 
 }
 
@@ -83,6 +127,7 @@ this.checkLogin();
   
 productModal = new bootstrap.Modal(document.getElementById('productModal') );
 
+delproductModal = new bootstrap.Modal(document.getElementById('delproductModal') );
 
 
 }
