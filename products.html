@@ -55,7 +55,7 @@
                         <button type="button" class="btn btn-outline-primary btn-sm"  @click="openModal('edit' ,item )">
                           編輯
                         </button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" @click="openModal('delete' )">
+                        <button type="button" class="btn btn-outline-danger btn-sm" @click="openModal('delete', item )">
                           刪除
                         </button>
                       </div>
@@ -103,7 +103,9 @@
                             
                             </div>
 
-                          <button v-if="!tempProducts.imagesUrl.length || tempProducts.imagesUrl[tempProducts.imagesUrl.length - 1]" class="btn btn-outline-primary btn-sm d-block w-100" type="button" @click="tempProducts.imagesUrl.push('')">
+                            <!--'!tempProducts.imagesUrl?.length|| tempProducts.imagesUrl[tempProducts.imagesUrl?.length - 1]'這行的意思是若tempProducts.imagesUrl的欄位裡面都沒有輸入文字 (也就是空值)'或'有上面欄位有填文字(當前陣列數字-1)(也就是判斷陣列裡面是否有輸入文字(有值)，也就是說判斷上面一張是否有輸入值，若有也會顯示新增圖片按鈕、另外會在imagesUrl後面加上問號是因為如果沒加會導致js判斷錯誤，因為新增商品的imagesUrl陣列裡面是空值，沒有值可以去做，後面資料會跑不出來，導致編輯產品會跳空白錯誤，若加上問號會暫時轉為 undefined 但還可以運作-->
+                          <button v-if="!tempProducts.imagesUrl?.length || tempProducts.imagesUrl[tempProducts.imagesUrl?.length - 1]" class="btn btn-outline-primary btn-sm d-block w-100" type="button" @click="tempProducts.imagesUrl.push('')">
+                            
                             新增圖片
                           </button>
                           <button v-else class="btn btn-outline-danger btn-sm d-block w-100" type="button" @click="tempProducts.imagesUrl.pop('')" >
@@ -214,9 +216,6 @@
           </div>
 
 
-
-
-      
     </div>
 
             <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js'

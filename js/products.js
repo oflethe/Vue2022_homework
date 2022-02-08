@@ -5,6 +5,7 @@ const site ='https://vue3-course-api.hexschool.io/v2' ;
 const api_path = 'oflethe';
 
 let productModal = {};
+let delProductModal={};
 
 
 const app = createApp({
@@ -53,7 +54,7 @@ getProducts() {
 const url = `${site}/api/${api_path}/admin/products/all`;
 axios.get(url)
     .then( res=> {
-        this.Products = res.data.product;
+        this.products = res.data.products;
         
     });
    
@@ -68,12 +69,14 @@ this.tempProducts = {
 }
 productModal.show();
 this.isNew =true;
+
 }else if (status === 'edit'){
-    this.tempProducts = { ...product};
+    this.tempProducts = { ...product };
     productModal.show();
     this.isNew = false;
 
-}else if (status === 'delete'){
+}
+else if (status === 'delete'){
     delProductModal.show();
     this.tempProducts = { ...product};
 
@@ -83,11 +86,13 @@ this.isNew =true;
 
 },
 
+
 updateProduct(){
    
 let url = `${site}/api/${api_path}/admin/product`;
 let method = 'post';
 
+//修改編輯
 if (!this.isNew){//這裡是false
     url = `${site}/api/${api_path}/admin/product/${this.tempProducts.id}`;
     method = 'put';
@@ -113,12 +118,13 @@ delProduct (){
           
             console.log(res);
             this.getProducts();
-            delproductModal.hide();
+            delProductModal.hide();
         });
     
 
 
 }
+
 
 },
 
@@ -127,7 +133,7 @@ this.checkLogin();
   
 productModal = new bootstrap.Modal(document.getElementById('productModal') );
 
-delproductModal = new bootstrap.Modal(document.getElementById('delproductModal') );
+delProductModal = new bootstrap.Modal(document.getElementById('delProductModal') );
 
 
 }
