@@ -128,6 +128,7 @@ delProduct (){
 
 },
 
+
 mounted() {
 this.checkLogin();
   
