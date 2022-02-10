@@ -5,7 +5,7 @@ const site ='https://vue3-course-api.hexschool.io/v2' ;
 const api_path = 'oflethe';
 
 let productModal = {};
-let delProductModal={};
+let delproductModal={};
 
 
 const app = createApp({
@@ -69,14 +69,13 @@ this.tempProducts = {
 }
 productModal.show();
 this.isNew =true;
-
 }else if (status === 'edit'){
     this.tempProducts = { ...product };
+    this.tempProducts.imagesUrl = this.tempProducts.imagesUrl ? this.tempProducts.imagesUrl : []
     productModal.show();
     this.isNew = false;
 
-}
-else if (status === 'delete'){
+}else if (status === 'delete'){
     delProductModal.show();
     this.tempProducts = { ...product};
 
@@ -118,23 +117,21 @@ delProduct (){
           
             console.log(res);
             this.getProducts();
-            delProductModal.hide();
+            delproductModal.hide();
         });
     
 
 
 }
 
-
 },
-
 
 mounted() {
 this.checkLogin();
   
 productModal = new bootstrap.Modal(document.getElementById('productModal') );
 
-delProductModal = new bootstrap.Modal(document.getElementById('delProductModal') );
+delproductModal = new bootstrap.Modal(document.getElementById('delproductModal') );
 
 
 }
