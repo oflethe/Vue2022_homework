@@ -15,6 +15,7 @@
         <div id="app">
             <div class="container">
               <div class="text-end mt-4">
+                <!-- 先在需要做出openmodal的功能按鈕上，放入openmodal的功能，再依照客家精神，共用皆有使用openmodal功能的按鈕去依序增加onclick的事件，此處為<建立新產品>，因此設定<isNew>的事件 -->
                 <button class="btn btn-primary" type="button" @click="openModal('isNew')">
                   建立新的產品
                 </button>
@@ -52,6 +53,7 @@
                     </td>
                     <td>
                       <div class="btn-group">
+                        <!-- 此處為編輯產品,判斷是當前產品需要編輯所以帶入item去 -->
                         <button type="button" class="btn btn-outline-primary btn-sm"  @click="openModal('edit' ,item )">
                           編輯
                         </button>
@@ -183,6 +185,7 @@
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                       取消
                     </button>
+                    <!-- 刪除事件 -->
                     <button type="button" class="btn btn-primary" @click="updateProduct">
                       確認
                     </button>
