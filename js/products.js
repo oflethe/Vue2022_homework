@@ -71,9 +71,17 @@ productModal.show();
 this.isNew =true;
 }else if (status === 'edit'){
     this.tempProducts = { ...product };
+
+     //問題點：有點不太確定是否是因為在html那邊撰寫的區塊因為js報錯，在物件屬性後方加上了?讓物件轉為undefined的狀況導致的 ，目前還不太了解為什麼沒有定義到該屬性，導致一開始跳出編輯視窗會有空白報錯，接著是沒有定義讓物件變成undefined狀態導致沒有辦法在編輯狀態新增圖片
+     
+    /*有跳出UNDEFINEDE錯誤，原因是因為沒有定義imagesUrl的屬性，導致系統讀取的時候發現沒有該屬性，因此跳出undefined錯誤，並且導致modal編輯產品視窗內的品項無法新增圖片，助教建議加上此行。
+    此行為三元運算子，是［條件?(判斷) 值1:值2，若判斷為ture則傳回值1，否則回傳值2］
+    理解的意思為 edit區域內的暫存區圖片如果確定為有值(ture)，則會回傳該屬性的原本值，否則會回傳定義他為一個陣列*/
+   
     this.tempProducts.imagesUrl = this.tempProducts.imagesUrl ? this.tempProducts.imagesUrl : []
     productModal.show();
     this.isNew = false;
+    
 
 }else if (status === 'delete'){
     delProductModal.show();
