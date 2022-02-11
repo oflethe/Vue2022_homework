@@ -87,7 +87,7 @@ this.isNew =true;
     
 //判斷為刪除狀態
 }else if (status === 'delete'){
-    delProductModal.show();
+    delproductModal.show();
     this.tempProducts = { ...product}; 
     //把品項也帶過來，刪除的時候就可以在提示視窗中帶入產品名稱先把指向該物件的，做JS淺拷貝(有些深層圖片或內容淺拷貝會受到影響)
 
